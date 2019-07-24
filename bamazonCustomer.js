@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  runSearch();
+  start();
 });
 function start(){
     inquirer
@@ -29,7 +29,7 @@ function start(){
           type: "list",
           message: "What Item Would You Like to Buy?",
           choices: ["Post an Item", "Bid on an Item"],
-          name: "post-bid"
+          name: "item-list"
         },
       
      
