@@ -43,27 +43,36 @@ function start(){
      
       ])
       .then(function(answer) {
-        switch (answer.action) {
-        case "Find songs by artist":
-          artistSearch();
-          break;
+        inquirer
+          .prompt([
+            {
+            type: "number",
+            message: "How many Would You Like to Purchase?",
+            name:"buyQuantity"
+            },
+          ])
+        
+        // switch (answer.action) {
+        // case "":
+        //   artistSearch();
+        //   break;
   
-        case "Find all artists who appear more than once":
-          multiSearch();
-          break;
+        // case "":
+        //   multiSearch();
+        //   break;
   
-        case "Find data within a specific range":
-          rangeSearch();
-          break;
+        // case "":
+        //   rangeSearch();
+        //   break;
   
-        case "Search for a specific song":
-          songSearch();
-          break;
+        // case "":
+        //   songSearch();
+        //   break;
             
-        case "exit":
-          connection.end();
-          break;
-        }
+        // case "":
+        //   connection.end();
+        //   break;
+        // }
       });
   }
         // // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
@@ -75,5 +84,5 @@ function start(){
         //   console.log("\nThat's okay.... " + inquirerResponse.bear + ", is ok i guess\n");
         // }
         // console.log(inquirerResponse)
-      });
-    }
+    //   });
+    // }
