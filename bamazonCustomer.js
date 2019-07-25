@@ -26,10 +26,10 @@ function listInventory(){
   connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err
    
-    console.log("|ID |    Product Name  |  Price  |");
+    
     console.log("<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>");
     for (var i = 0; i < res.length; i++) {
-        console.log("<>  " + res[i].id + "<>" + res[i].productName + "<>" + res[i].price + "<>");
+        console.log( "ID: " + res[i].id + "    <>     Product: " + res[i].productName + "    <>    " + "price"+res[i].price + "  <>  ");
     } 
   })
   inquirer
@@ -42,7 +42,7 @@ function listInventory(){
       },
     ])
     .then(function(answer) {
-      
+      console.log("                                                            ")
       start();
     })
     
@@ -65,7 +65,7 @@ function start(){
             "Bugatti Veyron",
             "Lamborghini sesto Elemento",
             "Giant Inflatable Unicorn"],
-          name: "item-list",
+          name: "inventory",
         },
         {
           type: "number",
@@ -77,32 +77,16 @@ function start(){
       ])
 
       .then(function(answer) {
-        
-           console.log("worked")
-          
-        
-        // switch (answer.action) {
-        // case "":
-        //   artistSearch();
-        //   break;
-  
-        // case "":
-        //   multiSearch();
-        //   break;
-  
-        // case "":
-        //   rangeSearch();
-        //   break;
-  
-        // case "":
-        //   songSearch();
-        //   break;
-            
-        // case "":
-        //   connection.end();
-        //   break;
-        // }
-      });
+        var userChoice = answer.inventory;
+        console.log(userChoice);
+        var newQuery = "SELECT * FROM products WHERE productName = ?"
+        connection.query(newQuery, [answer.userChoice], function (err, res) {
+             if (err) throw err;
+          });
+        })
+      
+         
 }
+
   
         
