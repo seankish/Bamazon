@@ -18,8 +18,36 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  start();
 });
+
+listInventory();
+
+function listInventory(){
+  connection.query("SELECT * FROM products", function (err, res) {
+    if (err) throw err
+   
+    console.log("|ID |    Product Name  |  Price  |");
+    console.log("<<<<<<<<<<<<<<<<<->>>>>>>>>>>>>>>>>>");
+    for (var i = 0; i < res.length; i++) {
+        console.log("<>  " + res[i].id + "<>" + res[i].productName + "<>" + res[i].price + "<>");
+    } 
+  })
+  inquirer
+    .prompt([
+      {
+        type: "confirm",
+        message: "Would you Like to Buy Something?",
+        name:"start-shop",
+      
+      },
+    ])
+    .then(function(answer) {
+      
+      start();
+    })
+    
+ 
+};
 function start(){
     inquirer
       .prompt([
@@ -29,28 +57,29 @@ function start(){
           choices: [
             "M240B Machine Gun", 
             "MK1L 40mm Grenade Launcher",
-            "Seadoo GTI PRO Jetski",
-            "OuterLimits 50 SL SpeedBoat",
-            "Honda CRX450 Dirtbike",
-            "Ducati SuperSport 900 Motorcycle",
-            "Ferrari Enzo Supercar",
-            "Bugatti Veyron Supercar",
-            "Lamborghini sesto Elemento Supercar",
-            "Gian Inflatable Unicorn"],
-          name: "item-list"
+            "Seadoo GTI PRO",
+            "OuterLimits 50 SL",
+            "Honda CRX450",
+            "Ducati SuperSport 900",
+            "Ferrari Enzo",
+            "Bugatti Veyron",
+            "Lamborghini sesto Elemento",
+            "Giant Inflatable Unicorn"],
+          name: "item-list",
+        },
+        {
+          type: "number",
+          message: "How many Would You Like to Purchase?",
+          name:"buyQuantity"
         },
       
-     
+    
       ])
+
       .then(function(answer) {
-        inquirer
-          .prompt([
-            {
-            type: "number",
-            message: "How many Would You Like to Purchase?",
-            name:"buyQuantity"
-            },
-          ])
+        
+           console.log("worked")
+          
         
         // switch (answer.action) {
         // case "":
@@ -74,15 +103,6 @@ function start(){
         //   break;
         // }
       });
-  }
-        // // If the inquirerResponse confirms, we displays the inquirerResponse's username and pokemon from the answers.
-        // if (inquirerResponse.bear =="polar bear") {
-        //   console.log("\nWelcome " + inquirerResponse.username);
-        //   console.log("Your correct! " + inquirerResponse.bear + " is the best type of bear\n");
-        // }
-        // else {
-        //   console.log("\nThat's okay.... " + inquirerResponse.bear + ", is ok i guess\n");
-        // }
-        // console.log(inquirerResponse)
-    //   });
-    // }
+}
+  
+        
